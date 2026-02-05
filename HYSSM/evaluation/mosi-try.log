@@ -1,0 +1,39 @@
+/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Evaluating on mosi with Fixed Missing Patterns...
+Model: /root/FoldFish/dataset/CoraDiff-Dataset/result/mosi/mr0.7_seed1234/imder-mosi.pth
+Data Loaded. Dims: [768, 5, 20]
+Model Loaded.
+
+=================================================================
+Scenario             | Acc-2      | F1         | MAE       
+=================================================================
+{V, A} (Miss L)      | 49.54%      | 43.04%      | 1.4837
+{L, A} (Miss V)      | 66.92%      | 66.91%      | 1.2496
+{L, V} (Miss A)      | 61.28%      | 60.77%      | 1.3076
+Traceback (most recent call last):
+  File "/root/FoldFish/code/cora-diff/eval/evaluation_main.py", line 91, in <module>
+    outputs = model(text, audio, vision, 
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/FoldFish/code/cora-diff/trains/singleTask/model/imder.py", line 236, in forward
+    proj_x_v = Euler_Maruyama_sampler(self.score_v, self.marginal_prob_std_fn, self.diffusion_coeff_fn, text.size(0),
+  File "/root/FoldFish/code/cora-diff/trains/singleTask/model/scoremodel.py", line 366, in Euler_Maruyama_sampler
+    score = score_model(x, batch_time_step, perturbed_condition, zs=zs, zp=zp)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/FoldFish/code/cora-diff/trains/singleTask/model/scoremodel.py", line 211, in forward
+    h4_with_cond = self.attention_4(h4.permute(2, 0, 1), condition.permute(2, 0, 1), condition.permute(2, 0, 1))
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/FoldFish/code/cora-diff/trains/subNets/transformers_encoder/transformer.py", line 81, in forward
+    x = layer(x, x_k, x_v)
+  File "/root/miniconda3/envs/omg/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+KeyboardInterrupt
